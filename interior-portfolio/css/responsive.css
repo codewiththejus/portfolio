@@ -1,0 +1,108 @@
+/* =========================================================
+   responsive.css — intentional layouts per breakpoint
+   ========================================================= */
+
+/* ---------- Laptop / small desktop ---------- */
+@media (max-width:1200px){
+  .spec__grid{grid-template-columns:repeat(2,1fr)}
+  .spec__card:nth-child(2){border-right:0}
+  .spec__card:nth-child(-n+2){border-bottom:1px solid rgba(30,29,26,.18)}
+  .skills__grid{grid-template-columns:repeat(2,1fr);gap:3rem 2rem}
+  .about__figure{grid-column:1 / span 5}
+  .about__body{grid-column:6 / span 7}
+  .facts{grid-template-columns:1fr}
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width:960px){
+  :root{--nav-h:68px}
+
+  /* mobile navigation as a full-screen sheet */
+  .nav__toggle{display:block;z-index:3}
+  .nav__links{
+    position:fixed;inset:0;z-index:2;background:var(--olive);color:var(--ivory);
+    flex-direction:column;justify-content:center;align-items:flex-start;gap:.4rem;padding:var(--nav-h) var(--gutter) 3rem;
+    clip-path:inset(0 0 100% 0);visibility:hidden;transition:clip-path .8s var(--ease),visibility 0s .8s;
+  }
+  .nav-open .nav__links{clip-path:inset(0 0 0 0);visibility:visible;transition:clip-path .8s var(--ease),visibility 0s}
+  .nav__links a{font-family:var(--serif);font-size:clamp(2.6rem,10vw,4rem);letter-spacing:0;text-transform:none;padding:.2rem 0}
+  .nav__links a::after{display:none}
+  .nav__links a.is-active{color:var(--sage);font-style:italic}
+  .nav-open .nav{color:var(--ivory);background:transparent;backdrop-filter:none;border-color:transparent}
+  .nav-open .nav__logo,.nav-open .nav__toggle{position:relative;z-index:3}
+  .nav-open{overflow:hidden}
+
+  .hero__plan{display:none}
+  .hero__shade{background:
+    linear-gradient(180deg,rgba(30,29,26,.55) 0%,rgba(30,29,26,0) 22%),
+    linear-gradient(0deg,rgba(30,29,26,.88) 0%,rgba(30,29,26,.55) 45%,rgba(30,29,26,.1) 85%)}
+  .hero__img{object-position:56% 60%}
+
+  .about__grid{grid-template-columns:1fr;gap:3rem}
+  .about__figure,.about__body{grid-column:1 / -1}
+  .about__figure{max-width:440px}
+  .about__ghost{display:none}
+  .facts{grid-template-columns:1fr 1fr}
+
+  .philosophy__grid{grid-template-columns:1fr;gap:3rem}
+  .philosophy__grid .display,.principles{grid-column:1 / -1;position:static}
+
+  .contact__grid{grid-template-columns:1fr}
+  .contact__intro,.form{grid-column:1 / -1}
+
+  .viewer__shell{grid-template-columns:1fr;grid-template-rows:minmax(0,46%) minmax(0,1fr)}
+}
+
+/* ---------- Large phones ---------- */
+@media (max-width:720px){
+  .section{padding-block:4.5rem}
+  .section__head{margin-bottom:2.2rem}
+
+  .hero{align-items:flex-end}
+  .hero__title{font-size:clamp(4.2rem,25vw,8rem);line-height:.88}
+  .hero__line{display:block;margin-right:0}
+  .hero__actions .btn{flex:1 1 100%;justify-content:space-between}
+  .hero__scroll{display:none}
+
+  /* projects: single column, alternating widths for rhythm */
+  .grid{grid-template-columns:1fr;row-gap:2.4rem}
+  .project,.project[data-span]{grid-column:1 / -1;margin-top:0}
+  .project:nth-child(even){width:86%;margin-left:auto}
+  .project .media,.project[data-span] .media{aspect-ratio:4/3}
+  .project__meta{grid-template-columns:auto 1fr;row-gap:.2rem}
+  .project__tools{grid-column:2;text-align:left}
+
+  .filters{flex-wrap:nowrap;overflow-x:auto;margin-inline:calc(var(--gutter) * -1);padding-inline:var(--gutter);scrollbar-width:none;width:calc(100% + var(--gutter) * 2)}
+  .filters::-webkit-scrollbar{display:none}
+  .filter{flex:0 0 auto}
+
+  .facts{grid-template-columns:1fr;gap:2rem}
+  .spec__grid{grid-template-columns:1fr}
+  .spec__card{border-right:0!important;border-bottom:1px solid rgba(30,29,26,.18)}
+  .spec__card:last-child{border-bottom:0}
+  .spec__card{flex-direction:row;flex-wrap:wrap;align-items:flex-start;padding:1.8rem 0}
+  .spec__icon{width:76px;height:58px;margin:0 1rem 0 0}
+  .spec__no{margin-left:auto}
+  .spec__card h3,.spec__card p{flex:1 1 100%}
+  .skills__grid{grid-template-columns:1fr 1fr;gap:2.5rem 1.2rem}
+  .skills__col li{font-size:1.9rem}
+  .contact__links li{grid-template-columns:1fr;gap:.2rem}
+  .footer__row{flex-direction:column;align-items:flex-start}
+
+  .viewer__shell{grid-template-rows:minmax(0,38%) minmax(0,1fr)}
+  .viewer__figure{padding:3.6rem 1rem 1rem}
+  .viewer__info{padding:1.4rem var(--gutter) 1.6rem}
+  .viewer__desc{margin-bottom:1.2rem}
+  .viewer__title{font-size:2.3rem}
+}
+
+@media (max-width:380px){
+  .skills__grid{grid-template-columns:1fr}
+  .btn{padding:.95rem 1.2rem}
+}
+
+/* landscape phones: keep hero text from overflowing */
+@media (max-height:520px) and (orientation:landscape){
+  .hero__title{font-size:clamp(3rem,13vh,6rem)}
+  .hero__intro{display:none}
+}
